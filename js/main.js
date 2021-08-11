@@ -10,7 +10,7 @@ function IngresarNumero(){
     return numeroIngresado;
 }
 
-const Continuar=_=>(prompt("Querés continuar?").toUpperCase());
+const Continuar=_=>(prompt("Querés continuar? Ingresar SI/NO").toUpperCase());
 
 const IngresarOperador=_=>prompt("Ingresá un operador matemático");
 
