@@ -13,13 +13,13 @@ const Continuar=_=>(prompt("Querés continuar? Ingresar SI/NO").toUpperCase());
 
 const IngresarOperador=_=>prompt("Ingresá un operador matemático");
 
-const Suma=(primerNumero,segundoNumero)=>primerNumero+segundoNumero;
+const Suma=(numeros)=>numeros[0]+numeros[1];
 
-const Resta=(primerNumero,segundoNumero)=>primerNumero-segundoNumero;
+const Resta=(numeros)=>numeros[0]-numeros[1];
 
-const Division=(primerNumero,segundoNumero)=>primerNumero/segundoNumero;
+const Division=(numeros)=>numeros[0]/numeros[1];
 
-const Multiplicacion=(primerNumero,segundoNumero)=>primerNumero*segundoNumero;
+const Multiplicacion=(numeros)=>numeros[0]*numeros[1];
 
 const Saludo=()=>document.write('<h3 class="px-3">Adios!</h3>');
 
@@ -51,13 +51,14 @@ function VerificarOperador(operador){
     }
 }
 
-function Operacion(operador,primerNumero,segundoNumero){
-    switch(operador){
+function Operacion(infoOperacion){
+    let numeros=infoOperacion.filter(item=>!isNaN(item));
+    switch(infoOperacion[2]){
         case "+":
             document.write(`
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    La suma entre ${primerNumero} y ${segundoNumero} es: ${Suma(primerNumero,segundoNumero)}
+                    La suma entre ${infoOperacion[0]} y ${infoOperacion[1]} es: ${Suma(numeros)}
                 </div>
               </div>
            </div>
@@ -68,7 +69,7 @@ function Operacion(operador,primerNumero,segundoNumero){
         case "-":
             document.write(`<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              La resta entre ${primerNumero} y ${segundoNumero} es: ${Resta(primerNumero,segundoNumero)}
+              La resta entre ${infoOperacion[0]} y ${infoOperacion[1]} es: ${Resta(numeros)}
             </div>
           </div>
        </div>
@@ -79,7 +80,7 @@ function Operacion(operador,primerNumero,segundoNumero){
         case "/":
             document.write(`<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              La división entre ${primerNumero} y ${segundoNumero} es: ${Division(primerNumero,segundoNumero)}
+              La división entre ${infoOperacion[0]} y ${infoOperacion[1]} es: ${Division(numeros)}
             </div>
           </div>
        </div>
@@ -90,7 +91,7 @@ function Operacion(operador,primerNumero,segundoNumero){
         case "*":
             document.write(`<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                La multiplicación entre ${primerNumero} y ${segundoNumero} es: ${Multiplicacion(primerNumero,segundoNumero)}
+                La multiplicación entre ${infoOperacion[0]} y ${infoOperacion[1]} es: ${Multiplicacion(numeros)}
             </div>
           </div>
        </div>
@@ -101,13 +102,13 @@ function Operacion(operador,primerNumero,segundoNumero){
     }
 }
 
-function RealizarOperacion(primerNumero,segundoNumero,operador){
-    console.log(`el operador ingresado es: ${operador}`);
-    while(!VerificarOperador(operador)){
+function RealizarOperacion(infoOperacion){
+    console.log(`el operador ingresado es: ${infoOperacion[2]}`);
+    while(!VerificarOperador(infoOperacion[2])){
         operador=IngresarOperador();
-        VerificarOperador(operador);
+        VerificarOperador(infoOperacion[2]);
     }
-    Operacion(operador,primerNumero,segundoNumero);    
+    Operacion(infoOperacion);    
 }
 
 const OperacionMatematica= class{
@@ -138,7 +139,8 @@ function main(){
     while (QuiereContinuar(continuar)){
         alert(`Ingresaste los números ${arrayInfoIngresada[0]} y ${arrayInfoIngresada[1]}`);
         operacionMatematica.MostrarOperacion(arrayInfoIngresada[2],arrayInfoIngresada[0],arrayInfoIngresada[1]);
-        RealizarOperacion(arrayInfoIngresada[0],arrayInfoIngresada[1],arrayInfoIngresada[2]);
+        /* RealizarOperacion(arrayInfoIngresada[0],arrayInfoIngresada[1],arrayInfoIngresada[2]); */
+        RealizarOperacion(arrayInfoIngresada);
         continuar=Continuar();
         if(QuiereContinuar(continuar)){
             arrayInfoIngresada[0]=IngresarNumero();
