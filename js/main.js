@@ -134,18 +134,18 @@ function main(){
     document.write(`<h3 class="px-3">Hola ${IngresarNombre()}</h3>`);
     let operacionMatematica=new OperacionMatematica();
     let continuar=Continuar();
+    let arrayInfoIngresada=[operacionMatematica.primerNumero,operacionMatematica.segundoNumero,operacionMatematica.operador];
     while (QuiereContinuar(continuar)){
-        alert(`Ingresaste los números ${operacionMatematica.primerNumero} y ${operacionMatematica.segundoNumero}`);
-        operacionMatematica.MostrarOperacion(operacionMatematica.operador,operacionMatematica.primerNumero,operacionMatematica.segundoNumero);
-        RealizarOperacion(operacionMatematica.primerNumero,operacionMatematica.segundoNumero,operacionMatematica.operador);
+        alert(`Ingresaste los números ${arrayInfoIngresada[0]} y ${arrayInfoIngresada[1]}`);
+        operacionMatematica.MostrarOperacion(arrayInfoIngresada[2],arrayInfoIngresada[0],arrayInfoIngresada[1]);
+        RealizarOperacion(arrayInfoIngresada[0],arrayInfoIngresada[1],arrayInfoIngresada[2]);
         continuar=Continuar();
         if(QuiereContinuar(continuar)){
-            operacionMatematica.primerNumero=IngresarNumero();
-            operacionMatematica.segundoNumero=IngresarNumero(); 
-            operacionMatematica.operador=IngresarOperador();
+            arrayInfoIngresada[0]=IngresarNumero();
+            arrayInfoIngresada[1]=IngresarNumero();
+            arrayInfoIngresada[2]=IngresarOperador();
         }        
     }
     Saludo();
 }
-
 main();
