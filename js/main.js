@@ -131,12 +131,27 @@ const OperacionMatematica= class{
 }
 
 
+function CantidadOperaciones(contador){
+    let texto=document.createElement("h4");
+    texto.innerHTML=`Realizaste ${contador} operaciones`;
+    document.body.appendChild(texto);
+    if(contador>3){
+        document.querySelector('h4').style.color="#a8e6cf"
+    }else{
+        document.querySelector('h4').style.color="#e6a8bf"
+    }
+
+    
+}
+
 function main(){
     document.write(`<h3 class="px-3">Hola ${IngresarNombre()}</h3>`);
+    let contador=0;
     let operacionMatematica=new OperacionMatematica();
     let continuar=Continuar();
     let arrayInfoIngresada=[operacionMatematica.primerNumero,operacionMatematica.segundoNumero,operacionMatematica.operador];
     while (QuiereContinuar(continuar)){
+        contador=contador+1;
         alert(`Ingresaste los números ${arrayInfoIngresada[0]} y ${arrayInfoIngresada[1]}`);
         operacionMatematica.MostrarOperacion(arrayInfoIngresada[2],arrayInfoIngresada[0],arrayInfoIngresada[1]);
         /* RealizarOperacion(arrayInfoIngresada[0],arrayInfoIngresada[1],arrayInfoIngresada[2]); */
@@ -148,6 +163,7 @@ function main(){
             arrayInfoIngresada[2]=IngresarOperador();
         }        
     }
+    CantidadOperaciones(contador);
     Saludo();
 }
 main();
